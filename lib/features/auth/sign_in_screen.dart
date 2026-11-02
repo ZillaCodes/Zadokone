@@ -66,7 +66,7 @@ class _SignInScreenState extends State<SignInScreen> {
   ))))));
   Future<void> _oauth(OAuthProvider provider) async {
     if (!_configured) { setState(() => _error = 'Configure Supabase to enable social sign in.'); return; }
-    try { await supabase.auth.signInWithOAuth(provider, redirectTo: Uri.base.origin); }
+    try { await supabase.auth.signInWithOAuth(provider, redirectTo: Uri.base.toString()); }
     catch (_) { if (mounted) setState(() => _error = 'Social sign in could not be started.'); }
   }
 }
