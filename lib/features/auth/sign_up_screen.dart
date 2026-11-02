@@ -28,7 +28,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
       final result = await supabase.auth.signUp(
         email: _email.text.trim(),
         password: _password.text,
-        emailRedirectTo: Uri.base.origin,
+        emailRedirectTo: Uri.base.toString(),
       );
       if (!mounted) return;
       if (result.session != null) {
