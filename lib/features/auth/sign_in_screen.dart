@@ -19,7 +19,12 @@ class _SignInScreenState extends State<SignInScreen> {
     if (_identity.text.trim().isEmpty || _password.text.isEmpty) { setState(() => _error = 'Enter your email and password.'); return; }
     setState(() { _loading = true; _error = null; });
     try {
-      await supabase.auth.signInWithPassword(email: _identity.text.trim(), password: _password.text);
+      final identity = _identity.text.trim();
+      if (identity.contains('@')) {
+        await supabase.auth.signInWithPassword(email: identity, password: _password.text);
+      } else {
+        await supabase.auth.signInWithPassword(phone: identity, password: _password.text);
+      }
       if (mounted) context.go('/home');
     } on AuthException catch (e) {
       if (mounted) setState(() => _error = e.message);
@@ -55,7 +60,7 @@ class _SignInScreenState extends State<SignInScreen> {
       const SizedBox(height: 14),
       OutlinedPillButton(label: 'Continue with Apple', icon: const Icon(Icons.apple, color: Colors.black, size: 23), onPressed: () => _oauth(OAuthProvider.apple)),
       const SizedBox(height: 24),
-      Center(child: Wrap(alignment: WrapAlignment.center, children: [const Text('Don’t have an account? ', style: TextStyle(fontSize: 12, color: AppColors.gray)), GestureDetector(onTap: () => setState(() => _error = 'Account creation will be available soon.'), child: const Text('Create an account', style: TextStyle(color: AppColors.gold, fontWeight: FontWeight.w600, fontSize: 12)))])),
+      Center(child: Wrap(alignment: WrapAlignment.center, children: [const Text('Don’t have an account? ', style: TextStyle(fontSize: 12, color: AppColors.gray)), GestureDetector(onTap: () => context.go('/sign-up'), child: const Text('Create an account', style: TextStyle(color: AppColors.gold, fontWeight: FontWeight.w600, fontSize: 12)))])),
       const SizedBox(height: 28), const SkylineFooter(caption: 'BUILDING HOMEOWNERS, BUILDING FUTURES'),
     ]),
   ))))));
