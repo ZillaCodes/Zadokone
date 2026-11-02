@@ -35,9 +35,7 @@ class WelcomeScreen extends StatelessWidget {
           IconChip(icon: Icons.people_outline, label: 'Connect & Thrive'),
         ]),
         const SizedBox(height: 28),
-        PrimaryButton(label: 'Get Started', onPressed: null),
-        const SizedBox(height: 0),
-        Builder(builder: (context) => PrimaryButton(label: 'Get Started', onPressed: () => context.go('/sign-in'))),
+        PrimaryButton(label: 'Get Started', onPressed: () => context.go('/sign-in')),
         const SizedBox(height: 18),
         Row(mainAxisAlignment: MainAxisAlignment.center, children: [
           const Flexible(child: Text('Already have an account? ', style: TextStyle(fontSize: 12))),
