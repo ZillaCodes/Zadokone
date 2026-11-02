@@ -1,0 +1,1 @@
+Add the supplied hero photograph here as `hero_family.jpg` before replacing the illustrated placeholder. Recommended: a high-resolution, landscape image of a smiling family in front of a modern home, cropped to keep the family visible on narrow screens. The app currently uses a CSS/Flutter illustration so it remains buildable without this optional photo.
